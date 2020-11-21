@@ -18,7 +18,13 @@ function manager() {
         {
             type: "input",
             name: "nameManager",
-            message: "What is the manager's name?"
+            message: "What is the manager's name?",
+            validate: async (input) => {
+                if (input == "" || /\s/.test(input)) {
+                    return "Please enter first or last name.";
+                }
+                return true;
+            }
         },
         {
             type: "input",
@@ -28,12 +34,24 @@ function manager() {
         {
             type: "input",
             name: "emailManager",
-            message: "What is the manager's email?"
+            message: "What is the manager's email?",
+            validate: async (input) => {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+                    return true;
+                }
+                return "Please enter a valid email address.";
+            }
         },
         {
             type: "input",
             name: "officeNumber",
-            message: "What is the manager's office number?"
+            message: "What is the manager's office number, numbers only, no spaces?",
+            validate: async (input) => {
+                if (isNaN(input)) {
+                    return "Please enter a number";
+                }
+                return true;
+            }
         }
 ]).then(function(data){
         const manager = new Manager(data.nameManager, data.managerId, data.emailManager, data.officeNumber);
@@ -60,7 +78,8 @@ function team() {
             engineer();
         } else if (data.memberChoice === "Intern"){
             intern();
-        } else console.log(teamMem)
+        } else (genHTML());
+//        } else console.log(teamMem)
     });
 };
 
@@ -69,7 +88,13 @@ function engineer() {
         {
             type: "input",
             name:"engineerName",
-            message: "What is the engineer's name?"
+            message: "What is the engineer's name?",
+            validate: async (input) => {
+                if (input == "" || /\s/.test(input)) {
+                    return "Please enter first or last name.";
+                }
+                return true;
+            }
         },
         {
             type: "input",
@@ -79,12 +104,23 @@ function engineer() {
         {
             type: "input",
             name: "engineerEmail",
-            message: "What is the engineer's email?"
+            message: "What is the engineer's email?",
+            validate: async (input) => {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+                    return true;
+                }
+            }    
         },
         {
             type: "input",
             name: "engineerGithub",
-            message: "What is the engineer's GitHub username?"
+            message: "What is the engineer's GitHub username?",
+            validate: async (input) => {
+                if (input == "" || /\s/.test(input)) {
+                    return "Please enter a github name.";
+                }
+                return true;
+            }
         }
     ]). then(function(data){
         const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub);
@@ -99,7 +135,13 @@ function intern() {
         {
             type: "input",
             name: "internName",
-            message: "What is the intern's name?"
+            message: "What is the intern's name?",
+            validate: async (input) => {
+                if (input == "" || /\s/.test(input)) {
+                    return "Please enter first or last name.";
+                }
+                return true;
+            }
         },
         {
             type: "input",
@@ -109,12 +151,23 @@ function intern() {
         {
             type: "input",
             name: "internEmail",
-            message: "What is the intern's email?"
+            message: "What is the intern's email?",
+            validate: async (input) => {
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+                    return true;
+                }
+            }
         },
         {
             type: "input",
             name: "internSchool",
-            message: "What is the intern's school?"
+            message: "What is the intern's school?",
+            validate: async (input) => {
+                if (input == "" || /\s/.test(input)) {
+                    return "Please enter a school.";
+                }
+                return true;
+            }
         }
     ]). then(function(data){
         const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool);
@@ -124,7 +177,12 @@ function intern() {
     });
 };
 
-
+function genHTML() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMem), "utf-8");
+}
 
 manager()
 // Write code to use inquirer to gather information about the development team members,
