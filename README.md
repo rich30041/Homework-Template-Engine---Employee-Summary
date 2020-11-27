@@ -5,8 +5,7 @@ Build a software engineering team generator command line application. The applic
 about the team manager and then information about the team members. The user can input any number of team members, and they may be a 
 mix of engineers and interns. This assignment must also pass all unit tests. When the user has completed building the team, the 
 application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user. 
-Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this 
-challenge as follows:
+Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
 
 # Request 
 As a manager
@@ -25,9 +24,6 @@ information based on their role with the company. For instance, an intern may pr
 provide their GitHub username.
 
 * Your app will run as a Node CLI to gather information about each employee.
-* Below is an example of what your application may look like. Remember, the styling is completely up to you so try to make it unique.
-![Employee Summary 1](./Assets/10-OOP-homework-demo-1.png)
-![Employee Summary 2](./Assets/10-OOP-homework-demo-2.png)
 
 In the `Develop` folder, there is a `package.json`, so make sure to `npm install`.
 The dependencies are, [jest](https://jestjs.io/) for running the provided tests, and [inquirer](https://www.npmjs.com/package/inquirer) 
